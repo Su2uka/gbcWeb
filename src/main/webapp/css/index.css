@@ -234,3 +234,7 @@ video {
         display: none;
     }
 }
+
+.profile {
+    font-weight: 500;
+}

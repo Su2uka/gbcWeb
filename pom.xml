@@ -130,7 +130,7 @@
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!--jdk编译插件-->
-        <plugin>
+        <!--<plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.1</version>
@@ -140,19 +140,19 @@
             <encoding>utf-8</encoding>
           </configuration>
         </plugin>
-        <!--tomcat插件-->
+        &lt;!&ndash;tomcat插件&ndash;&gt;
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
-          <!-- tomcat7的插件， 不同tomcat版本这个也不一样 -->
+          &lt;!&ndash; tomcat7的插件， 不同tomcat版本这个也不一样 &ndash;&gt;
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.1</version>
           <configuration>
-            <!-- 通过maven tomcat7:run运行项目时，访问项目的端口号 -->
+            &lt;!&ndash; 通过maven tomcat7:run运行项目时，访问项目的端口号 &ndash;&gt;
             <port>80</port>
-            <!-- 项目访问路径  本例：localhost:9090,  如果配置的aa， 则访问路径为localhost:9090/aa-->
+            &lt;!&ndash; 项目访问路径  本例：localhost:9090,  如果配置的aa， 则访问路径为localhost:9090/aa&ndash;&gt;
             <path>/</path>
           </configuration>
-        </plugin>
+        </plugin>-->
       </plugins>
     </pluginManagement>
   </build>

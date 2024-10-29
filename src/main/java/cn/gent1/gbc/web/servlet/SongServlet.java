@@ -35,7 +35,7 @@ public class SongServlet extends BaseServlet {
 
         //2.处理参数
         if (search != null && search.length() > 0 && !"null".equals(search)) {
-            search = new String(search.getBytes("iso-8859-1"), "utf-8");
+            //search = new String(search.getBytes("iso-8859-1"), "utf-8");
         } else {
             search = "";
         }
@@ -83,7 +83,7 @@ public class SongServlet extends BaseServlet {
 
         //2.处理参数
         if (search != null && search.length() > 0 && !"null".equals(search)) {
-            search = new String(search.getBytes("iso-8859-1"), "utf-8");
+            //search = new String(search.getBytes("iso-8859-1"), "utf-8");
         } else {
             search = "";
         }
@@ -124,7 +124,7 @@ public class SongServlet extends BaseServlet {
 
         //处理参数
         if (search != null && search.length() > 0 && !"null".equals(search)) {
-            search = new String(search.getBytes("iso-8859-1"), "utf-8");
+            //search = new String(search.getBytes("iso-8859-1"), "utf-8");
         } else {
             search = "";
         }
@@ -162,7 +162,7 @@ public class SongServlet extends BaseServlet {
 
         //处理参数
         if (search != null && search.length() > 0 && !"null".equals(search)) {
-            search = new String(search.getBytes("iso-8859-1"), "utf-8");
+            //search = new String(search.getBytes("iso-8859-1"), "utf-8");
         } else {
             search = "";
         }

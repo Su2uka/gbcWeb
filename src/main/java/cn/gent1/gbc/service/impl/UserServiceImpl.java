@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
 
         //3.发送激活邮箱
-        //String content = "<a href='https://gent1.cn/user/activate?code="+user.getCode()+"'>点击激活【GIRLS BAND CRY】</a>";
-        String content = "<a href='http://localhost/user/activate?code="+user.getCode()+"'>点击激活【GIRLS BAND CRY】</a>";
+        String content = "<a href='https://gent1.cn/user/activate?code="+user.getCode()+"'>点击激活【GIRLS BAND CRY】</a>";
+        //String content = "<a href='http://localhost/user/activate?code="+user.getCode()+"'>点击激活【GIRLS BAND CRY】</a>";
 
         MailUtils.sendMail(user.getEmail(),content,"【GIRLS BAND CRY】激活邮件");
         return true;

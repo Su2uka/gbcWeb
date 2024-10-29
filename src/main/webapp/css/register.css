@@ -1,0 +1,101 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 设置背景图片 */
+body {
+    background-image: url('../img/register/GBC_togetoge_kv1.webp'); /* 这里替换为你的图片URL */
+    background-size: cover; /* 背景图片覆盖整个屏幕 */
+    background-position: center 3px; /* 图片居中 */
+    background-repeat: no-repeat; /* 不重复图片 */
+    /*            padding-top: 0px; !* 导航栏的高度 *!*/
+}
+
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* 背景色+透明度 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.centered-form {
+    height: 100vh; /* 让它占满屏幕高度 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+
+.login_img img {
+    width: 310px;
+    padding-bottom: 30px;
+}
+
+.register_title p {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bolder;
+    letter-spacing: 10px;
+}
+
+.captcha-image img {
+    width: 120px;
+    height: 40px;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #333;
+    border-radius: 5px;
+    margin-left: 10px; /* 增加图片与输入框的间距 */
+}
+
+.captcha-group {
+    display: flex;
+    align-items: center;
+}
+
+.invalid-feedback {
+    /*            opacity: 0;*/
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 右下角按钮样式 */
+.bg-toggle-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 50px; /* 确保宽度和高度一致 */
+    height: 50px; /* 确保高度和宽度一致，形成正圆形 */
+    border-radius: 50%; /* 通过设置 border-radius 为 50% 来确保正圆 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    cursor: pointer;
+    z-index: 9999; /* 确保按钮在所有内容之上 */
+}
+
+/* 动画：点击按钮时旋转 */
+.rotate {
+    animation: rotation 1s ease-in-out; /* 去掉 infinite，动画只执行一次 */
+}
+
+/* 调整图标大小 */
+.bg-toggle-button .glyphicon {
+    font-size: 20px; /* 放大图标，而不改变按钮大小 */
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

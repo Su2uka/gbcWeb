@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>首页-ガールズバンドクライ</title>
+
+  <!-- Bootstrap -->
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+
+
+  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="js/bootstrap.min.js" ></script>
+
+  <script src="js/index.js"></script>
+
+  <script src="js/include.js"></script>
+
+
+</head>
+<body>
+<!--导航栏部分-->
+<div id="header"></div>
+
+<script>
+
+  $(function () {
+    // 使用 jQuery 绑定 mouseup 事件
+    $('#btn').mouseup(function() {
+      var targetOffset = $('.tt_white').offset().top;
+
+      $('html, body').animate({
+        scrollTop: targetOffset
+      }, {
+        duration: 800,        // 滚动持续时间，单位为毫秒
+        easing: 'swing'        // 使用内置的 'swing' 缓动函数，模拟非线性运动
+      });
+    });
+  });
+
+</script>
+
+
+<!--首页主体-->
+<div class="white-section">
+  <div class="container" style="height: 950px">
+    <div class="col-md-4">
+      <div class="phone">
+        <img src="img/phone.webp" >
+      </div>
+    </div>
+    <div class="col-md-8 interact" style="height: 950px">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title_red">
+            <img  src="img/title_red.webp">
+          </div>
+        </div>
+      </div>
+      <div class="row" style="height: 200px">
+        <div class="slogan_white">
+          <img src="img/slogan_white.webp">
+          <div class="text-overlay" id="btn">
+            <p class="slogan">“ 憤怒也好 喜悅也好 悲傷也好 <br>把一切都放进去 ”</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--介绍内容-->
+<div class="black-section">
+  <div class="container-fluid">
+    <br>
+    <div class="row">
+      <div class="tt_white">
+        <img src="img/tt_white.webp ">
+      </div>
+    </div>
+    <div class="row cards">
+      <div class="col-md-2 cd">
+        <div class="card" id="card1">
+          <img src="img/introduce/img_body-rupa.webp" alt="Card 1">
+          <div class="card-content">
+            <h3 style="color: #EEDA01;font-weight: bolder">RUPA</h3>
+            <br>
+            <p style="font-weight: 500">担当：贝斯<br>
+
+              年龄：22岁<br>
+
+              生日：6月28日<br>
+
+              身高：169cm<br>
+
+              血型：O型<br>
+
+              出身：南亚<br>
+
+              喜欢的食物：芭菲、布丁圣代、汉堡肉<br>
+
+              兴趣：晚上喝酒、阅读<br>
+              <br>
+              &emsp;&emsp;父亲是南亚人、母亲是日本人的混血儿，肤色略带褐色，有着东亚异国风情的少女。非常有艺术才华，也很聪明，是所谓的天才，因稳重的说话方式和谦虚的态度而受到众人尊敬。唯一的缺点是喝太多酒就会变得很大胆。
+            </p>
+            <p style="font-weight: bolder">点击观看角色pv<span class="glyphicon glyphicon-play" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 cd">
+        <div class="card" id="card2">
+          <img src="img/introduce/img_body-subaru.webp" alt="Card 2">
+          <div class="card-content">
+            <h3 style="color: #76BD53;font-weight: bolder">安和 昴 (Awa Subaru)</h3>
+            <br>
+            <p style="font-weight: 500">担当：鼓手<br>
+
+              年龄：17岁<br>
+
+              生日：4月27日<br>
+
+              身高：158cm<br>
+
+              血型：AB型<br>
+
+              出身：兵库县神户市<br>
+
+              喜欢的食物：香菜、青椒、柠檬、酸的食物<br>
+
+              兴趣：室内组、游戏、网络、在网上与人争论<br>
+              <br>
+              &emsp;&emsp;就读艺能学校的女孩子。相当有前途，会出演广告。善于处事且和蔼可亲的美少女。以说是模特儿也不奇怪的美貌自豪，但内心深处是一名好胜的小姐。
+            </p>
+            <p style="font-weight: bolder">点击观看角色pv<span class="glyphicon glyphicon-play" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 cd">
+        <div class="card" id="card3">
+          <img src="img/introduce/img_body-nina.webp" alt="Card 3">
+          <div class="card-content">
+            <h3 style="color: #D90E2C;font-weight: bolder">井芹 仁菜 (Iseri Nina)</h3>
+            <br>
+            <p style="font-weight: 500">
+              担当：主唱<br>
+
+              年龄：17岁<br>
+
+              生日：10月24日<br>
+
+              身高：152cm<br>
+
+              血型：A型<br>
+
+              出身：熊本县熊本市<br>
+
+              喜欢的食物：浸物、牛奶咖啡、酸奶<br>
+
+              兴趣：昭和迷、喜欢佛像、收集御朱印是毕生事业<br>
+              <br>
+              &emsp;&emsp;稍微有些内向的普通女孩子，小学、中学、高中都不太引人注意，成绩也很普通。没有什么特别的梦想，观察周遭的气氛，配合着大家而生活。
+            </p>
+            <p style="font-weight: bolder">点击观看角色pv<span class="glyphicon glyphicon-play" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 cd">
+        <div class="card" id="card4">
+          <img src="img/introduce/img_body-tomo.webp" alt="Card 4">
+          <div class="card-content">
+            <h3 style="color: #E34D8D;font-weight: bolder">海老冢 智 (Ebizuka Tomo)</h3>
+            <br>
+            <p style="font-weight: 500">担当：键盘<br>
+
+              年龄：16岁<br>
+
+              生日：3月22日<br>
+
+              身高：148cm<br>
+
+              血型：B型<br>
+
+              出身：宫城县仙台市<br>
+
+              喜欢的食物：泡芙、白饭、茶泡饭、梅干<br>
+
+              兴趣：壁虎、饲养爬虫类<br>
+              <br>
+              &emsp;&emsp;原本是在家乡相当有名的有钱人家大小姐，现在则是与其他人分租公寓。性格冷淡，总是用不好的角度来看世界。像是刺猬一样非常有警戒心，难以敞开心房。
+            </p>
+            <p style="font-weight: bolder">点击观看角色pv<span class="glyphicon glyphicon-play" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 cd">
+        <div class="card" id="card5">
+          <img src="img/introduce/img_body-momoka.webp" alt="Card 5">
+          <div class="card-content">
+            <h3 style="color: #85C9DC;font-weight: bolder">河原木 桃香 (Kawaragi Momoka)</h3>
+            <br>
+            <p style="font-weight: 500">担当：吉他<br>
+
+              年龄：20岁<br>
+
+              生日：12月9日<br>
+
+              身高：164cm<br>
+
+              血型：O型<br>
+
+              出身：北海道旭川市<br>
+
+              喜欢的食物：馅蜜、烤肉<br>
+
+              兴趣：阅读、看体育比赛<br>
+              <br>
+              &emsp;&emsp;20岁的街头音乐艺人。随兴且刚烈。讨厌打扮得像女孩子一样，发型与服装都比较简单。开朗又很会照顾人，有点像是运动社团里值得依靠的前辈。
+            </p>
+            <p style="font-weight: bolder">点击观看角色pv<span class="glyphicon glyphicon-play" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--<br><br><br><br>-->
+  <!-- 视频播放器 -->
+  <div class="video-container">
+    <video id="video-player" controls>
+      <source src="" type="video/mp4">
+      您的浏览器不支持 HTML5 视频标签。
+    </video>
+  </div>
+
+
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+/*body, html {
+            height: 100%;
+        }
+
+        .form-container {
+            background-color: #f7f7f7; !* 背景色 *!
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }*/
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 设置背景图片 */
+body {
+    background-image: url('../img/login/login_background.webp');
+    background-size: cover; /* 背景图片覆盖整个屏幕 */
+    background-position: center ; /* 图片居中 */
+    background-repeat: no-repeat; /* 不重复图片 */
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* 背景色+透明度 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.centered-form {
+    height: 100vh; /* 让它占满屏幕高度 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+/*#check {
+    width: 280px;
+}*/
+
+.captcha-image img {
+    width: 120px;
+    height: 40px;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #333;
+    border-radius: 5px;
+    margin-left: 10px; /* 增加图片与输入框的间距 */
+}
+/*.captcha-image img {
+    width: 120px;
+    height: 40px;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #333;
+    border-radius: 5px;
+    margin-left: 10px; !* 增加图片与输入框的间距 *!
+}*/
+
+.captcha-group {
+    display: flex;
+    align-items: center;
+}
+
+.login_img img {
+    width: 310px;
+    padding-bottom: 30px;
+}
+
+.invalid-feedback {
+    /*            opacity: 0;*/
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}

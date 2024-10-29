@@ -1,0 +1,74 @@
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* dialog 模态框样式 */
+dialog {
+    width: 350px;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: fadeIn 0.4s ease;
+}
+
+/* 背景遮罩层 */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* 模态框头部 */
+.modal-header {
+    background-color: beige;
+    padding: 10px;
+    color: black;
+    text-align: center;
+}
+
+/* 模态框正文 */
+.modal-body {
+    padding: 20px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+/* 模态框底部 */
+.modal-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    padding: 10px 20px;
+    background-color: beige;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.close-btn:hover {
+    background-color: bisque;
+    transform: scale(1.05);
+}
+
+/* 模态框淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

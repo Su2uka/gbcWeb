@@ -1,0 +1,301 @@
+body {
+    padding-top: 50px;
+}
+
+.song-list {
+    padding-left: 0;
+    margin-left: 50px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    position: relative; /* 必须用相对或绝对定位来使用子元素的绝对定位 */
+}
+
+.song-cover {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.song-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*.song-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}*/
+
+.song-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap; /* 防止换行 */
+    overflow: hidden; /* 隐藏超出的文本 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    max-width: 200px; /* 根据需要设置最大宽度 */
+}
+
+.song-artist {
+    margin: 0;
+    padding-top: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* 让专辑名居中对齐 */
+.song-album {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.song-actions {
+    display: flex;
+    align-items: center;
+}
+
+.song-duration {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #999;
+}
+
+.song-item:hover {
+    background-color: #f0f0f0; /* 鼠标悬停时的背景色 */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* 鼠标悬停时的阴影 */
+}
+
+.icon-link {
+    text-decoration: none; /* 去掉默认的链接下划线 */
+}
+
+
+.download-icon, .play-icon, .like-icon, .backward-icon, .forward-icon, .playMode-icon{
+    font-size: 18px; /* 图标大小 */
+    color: #333; /* 图标颜色 */
+    padding: 10px; /* 增加点击区域 */
+    border: 1px solid transparent; /* 初始无边框 */
+    border-radius: 50%; /* 圆形按钮外观 */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.playMode-icon-img {
+    width: 24px;
+    height: 24px;
+    margin-top: 3px;
+}
+
+.playMode-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;          /* 启用 flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+}
+
+
+.download-icon:hover, .play-icon:hover, .like-icon:hover, .backward-icon:hover, .forward-icon:hover, .playMode-icon:hover {
+    background-color: #f0f0f0; /* 悬停时背景变灰 */
+    border-color: #ccc; /* 悬停时显示边框 */
+    cursor: pointer; /* 鼠标变成手型 */
+}
+
+.player-container {
+    /*display: flex;
+    flex-direction: column; !* 如果需要垂直居中 *!
+    align-items: center;    !* 水平居中子元素 *!*/
+}
+
+
+/* 唱片机样式 */
+.record-player {
+    position: fixed;
+    top: 50%;
+    /* 不设置 left 值，稍后通过 jQuery 设置 */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 888;
+}
+
+.record {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 0s linear infinite; /* 默认不旋转 */
+}
+
+.record-cover {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%; /* 圆形封面 */
+    position: absolute;
+}
+
+/* 旋转动画 */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.playing .record-cover {
+    animation: spin 10s linear infinite; /* 播放时以10秒旋转一次 */
+}
+
+/* 进度条容器样式 */
+#progress-bar-container {
+    width: 100%;
+    max-width: 220px; /* 让它与唱片大小一致 */
+    margin-top: 20px; /* 与唱片保持间距 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 左右分布 */
+}
+
+#progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #ddd;
+    position: relative;
+    margin: 0 10px; /* 给时间和进度条增加一点距离 */
+}
+
+.ui-slider-range {
+    background-color: black; /* 进度条已播放部分的颜色 */
+}
+
+/* 默认情况下的圆形拖动按钮 */
+.ui-slider-handle {
+    width: 10px;
+    height: 10px;
+    background-color: #F8F8FF;
+    border-radius: 50%;
+    /*top: -4px;*/
+}
+
+/* 当按钮被按住时，改变颜色 */
+.ui-slider-handle:active {
+    background-color: #DCDCDC;
+}
+
+#current-time, #total-duration {
+    font-size: 12px; /* 调整字体大小 */
+    color: #666; /* 文字颜色 */
+}
+
+/* 当前歌曲标题样式 */
+.song-title-display {
+    margin-top: 10px; /* 距离唱片机的上边距 */
+    margin-bottom: 0px; /* 距离进度条的下边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 加粗字体 */
+    text-align: center; /* 居中对齐 */
+    color: #333; /* 文字颜色 */
+    white-space: nowrap; /* 防止换行 */
+    overflow: hidden; /* 隐藏超出的文本 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    max-width: 230px; /* 根据需要设置最大宽度 */
+}
+
+/* 图标容器的样式，使用 flexbox 实现横向排列 */
+.icon-container {
+    width: 220px;
+    display: flex;
+    justify-content: center; /* 图标居中 */
+    gap: 2px; /* 图标之间的间距 */
+    margin-top: 10px; /* 距离进度条的上边距 */
+}
+
+/* 图标的基本样式 */
+.icon-link {
+    text-decoration: none; /* 去掉下划线 */
+    font-size: 24px; /* 调整图标大小 */
+    color: #333; /* 图标颜色 */
+    cursor: pointer; /* 鼠标悬停时显示为手型 */
+}
+
+.icon-link:hover {
+    color: beige; /* 悬停时的颜色变化 */
+}
+
+/* 隐藏唱片机但占位 */
+.record-player {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* 添加过渡效果 */
+}
+
+/* 显示唱片机时 */
+.record-player.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.search-feedback {
+    margin-left: 50px;
+    padding-top: 10px;
+    font-size: large;
+    visibility: hidden;
+}
+
+.page-navigation {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.page-navigation li a {
+    color: #0f0f0f;
+}
+
+.like-active {
+    color: red;
+}
+
+
+.flex-container {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    font-size: x-large;
+    margin-left: 70px;
+    margin-top: 5px;
+}
+
+.flex-container p {
+    margin: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.flex-container span {
+    color: red;
+}

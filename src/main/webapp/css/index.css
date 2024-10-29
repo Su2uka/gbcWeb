@@ -1,0 +1,236 @@
+/*.logo {
+      padding-right: 50px;
+    }*/
+
+/* 确保html和body没有外边距并占满整个页面 */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* 白色区域的样式，固定高度为956px */
+.white-section {
+    height: 956px; /* 固定白色区域高度为956px */
+    background-color: #e3e0e3; /* 设置背景颜色为色 */
+}
+
+/* 页面其余部分为黑色 */
+.black-section {
+    /*height: 100vh;*/ /* 模拟其余部分的页面内容 */
+    background-color: black; /* 设置背景颜色为黑色 */
+
+}
+
+
+
+body {
+    padding-top: 50px; /* 导航栏的高度 */
+}
+
+.phone {
+    position: relative;
+    right: 300px;
+    bottom: 50px;
+}
+
+.phone img {
+    width: 1700px;
+}
+
+.title_red {
+    position: relative;
+    bottom: 150px;
+    left: 10px;
+}
+
+.title_red img {
+    width: 800px;
+}
+
+.slogan_white {
+    position: relative;
+    bottom: 400px;
+    right: 20px;
+}
+
+.slogan_white img {
+    width: 1000px;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 使用translate确保文本完全居中 */
+    color: black; /* 文本颜色 */
+    text-align: center; /* 文本居中对齐 */
+    /*background-color: rgba(0, 0, 0, 0.5); !* 半透明背景，便于阅读文本 *!*/
+    padding-bottom: 75px; /* 添加内边距 */
+    padding-left: 50px;
+    width: 100%; /* 覆盖整个图片宽度 */
+}
+
+
+
+.slogan {
+    display: inline-block; /* 背景包裹文本 */
+    padding: 5px 10px; /* 增加内边距 */
+    border: 2px solid black; /* 边框设置为2px的颜色 */
+    border-radius: 30px; /* 设置边框圆角 */
+    background-color: transparent; /* 背景设置为透明 */
+    color: black; /* 字体颜色和边框颜色一致 */
+    font-size: 40px; /* 设置字体大小 */
+    font-family: 'Arial', sans-serif; /* 设置字体 */
+    font-weight: bold; /* 加粗字体 */
+    text-align: center; /* 文本居中 */
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+    transition: all 0.3s ease; /* 过渡效果，用于鼠标悬停时的变化 */
+}
+
+
+/* 鼠标悬停时的效果 */
+.slogan:hover {
+    background-color: #ff4500; /* 背景变深 */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4); /* 增加阴影深度 */
+    transform: translateY(-3px); /* 轻微上移按钮，使它有按压的效果 */
+}
+
+/* 鼠标点击时的效果 */
+.slogan:active {
+    background-color: #e63946; /* 按下时背景更深 */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* 阴影变浅 */
+    transform: translateY(2px); /* 按下时按钮向下压一点 */
+}
+
+.tt_white {
+    padding-left: 50px;
+}
+
+.tt_white img{
+    width: 150px;
+}
+
+.card {
+    position: relative;
+    width: 255px; /* 初始宽度 */
+    height: 645px; /* 初始高度 */
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 5px solid transparent; /* 边框 */
+    /*padding: 200px;*/
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center; /* 初始状态下子元素居中 */
+    gap: 40px; /* 设置子元素之间的间距 */
+    align-items: flex-start; /* 保证子元素顶部对齐 */
+    flex-wrap: wrap; /* 在小屏幕下允许换行 */
+    padding-top: 20px;
+    padding-bottom: 98px;
+}
+
+
+#card1 {
+    background-color: #eeda01; /* 设置卡片背景颜色 */
+}
+
+#card2 {
+    background-color: #76bd53; /* 设置卡片背景颜色 */
+}
+
+#card3 {
+    background-color: #d90e2c; /* 设置卡片背景颜色 */
+}
+
+#card4 {
+    background-color: #e34d8d; /* 设置卡片背景颜色 */
+}
+
+#card5 {
+    background-color: #85c9dc; /* 设置卡片背景颜色 */
+}
+
+.card img {
+    width: 100%;
+    height: 100%; /* 图片填满卡片 */
+    object-fit: cover; /* 保持图片比例并填充卡片 */
+    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease; /* 增加平滑位移效果 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 图片水平和垂直居中 */
+}
+
+.card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+}
+
+
+
+
+.card:hover {
+    width: 420px;  /* 卡片水平扩展 */
+    height: 700px; /* 卡片垂直扩展 */
+    margin-left: -81px; /* 保持卡片居中，向两边展开 */
+    margin-top: -35px;  /* 卡片向上展开 */
+}
+
+.card:hover img {
+    /* 图片随着卡片一起展开*/
+    width: 100%;
+    height: 130%;
+    transform: translate(-50%, -40%); /* 仍然保持居中 */
+    filter: blur(2px); /* 当鼠标悬停时，模糊效果 */
+}
+
+.card:hover .card-content {
+    opacity: 1;
+}
+
+.card-content h3 {
+    margin: 0;
+}
+
+.card-content p {
+    margin: 5px 0;
+}
+
+/* 视频容器样式 */
+.video-container {
+    display: none;
+    width: 80%;
+    margin: 50px auto;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border: 3px solid #000;
+}
+
+@media (max-width: 992px) { /* 当屏幕宽度小于 992px 时 */
+    .interact {
+        display: none;
+    }
+}

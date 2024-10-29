@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>注册-ガールズバンドクライ</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <script>
+        // 校验邮箱
+        function checkEmail() {
+            // 1. 获取值
+            var email = $("#email").val();
+
+            if (email == null || email.length == 0) {
+                return;
+            }
+
+            // 2. 定义正则
+            var reg_email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+            // 3. 判断
+            var flag = reg_email.test(email);
+            var emailGroup = $("#email").closest(".form-group");
+
+            if (flag) {
+                // 合法 - 移除错误样式
+                emailGroup.removeClass("has-error has-feedback");
+                emailGroup.find(".glyphicon").remove();
+            } else {
+                // 非法 - 添加错误样式和图标
+                emailGroup.addClass("has-error has-feedback");
+                if (!emailGroup.find(".glyphicon").length) {
+                    emailGroup.append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+                }
+            }
+            return flag;
+        }
+
+        // 校验密码
+        function checkPassword() {
+            // 1. 获取密码的值
+            var password = $("#password").val();
+
+            if (password == null || password.length == 0) {
+                return;
+            }
+
+            // 2. 定义正则
+            var reg_password = /^\w{8,20}$/;
+
+            // 3. 判断
+            var flag = reg_password.test(password);
+            var passwordGroup = $("#password").closest(".form-group");
+
+            if (flag) {
+                // 合法 - 移除错误样式
+                passwordGroup.removeClass("has-error has-feedback");
+                passwordGroup.find(".glyphicon").remove();
+            } else {
+                // 非法 - 添加错误样式和图标
+                passwordGroup.addClass("has-error has-feedback");
+                if (!passwordGroup.find(".glyphicon").length) {
+                    passwordGroup.append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+                }
+            }
+            return flag;
+        }
+
+        // 校验重复密码
+        function checkRepeatPassword() {
+            // 1. 获取重复密码的值
+            var repeatPassword = $("#repeatPassword").val();
+
+            if (repeatPassword == null || repeatPassword.length == 0) {
+                return;
+            }
+
+            // 2. 获取密码的值
+            var password = $("#password").val();
+            var repeatPasswordGroup = $("#repeatPassword").closest(".form-group");
+
+            // 3. 判断
+            if (repeatPassword === password) {
+                // 合法 - 移除错误样式
+                repeatPasswordGroup.removeClass("has-error has-feedback");
+                repeatPasswordGroup.find(".glyphicon").remove();
+                return true;
+            } else {
+                // 非法 - 添加错误样式和图标
+                repeatPasswordGroup.addClass("has-error has-feedback");
+                if (!repeatPasswordGroup.find(".glyphicon").length) {
+                    repeatPasswordGroup.append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+                }
+                return false;
+            }
+        }
+
+
+        $(function () {
+            //当表单提交时，调用所有的校验方法
+            $("#registerForm").submit(function () {
+                //先判断，再发生数据到服务器
+                if (checkEmail() & checkPassword() & checkRepeatPassword()) {
+                    $.post("user/register", $(this).serialize(),function (data) {
+                        if (data.flag) {
+                            //注册成功，弹出提示信息，跳转主页
+                            showDialog();
+                        } else {
+                            //注册失败,给errorMsg添加提示信息
+
+                            $("#errorMsg").html(data.errorMsg);
+                            $(".invalid-feedback").css("visibility","visible");
+
+                            //验证码刷新
+                            //document.getElementById("checkCode").src = "checkCode?" + new Date().getTime();
+                            $("#checkCode").click();
+                        }
+                    });
+                }
+
+                return false;
+            });
+
+            //当某一个组件失去焦点时，调用对应的校验方法
+
+            $("#email").blur(checkEmail);
+            $("#password").blur(checkPassword);
+            $("#repeatPassword").blur(checkRepeatPassword);
+        });
+
+    </script>
+    <script src="js/include.js"></script>
+    <script>
+        $(function () {
+            // 定义背景图片数组
+            var backgroundImages = [
+                'img/register/GBC_togetoge_kv1.webp',
+                'img/register/GBC_togetoge_kv4.webp',
+                'img/register/GBC_togetoge_kv8.webp',
+                'img/register/GBC_togetoge_kv3.webp'
+            ];
+
+            var currentImageIndex = 0;
+
+            // 点击按钮，先开始旋转
+            $('#bg-toggle-button').click(function () {
+                var icon = $(this).find('.glyphicon');
+
+                // 添加旋转效果
+                icon.addClass('rotate');
+
+                // 使用 one() 确保动画结束时只执行一次切换
+                icon.one('animationend', function () {
+                    // 切换背景图片
+                    currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                    $('body').css('background-image', 'url(' + backgroundImages[currentImageIndex] + ')');
+
+                    // 移除旋转效果，防止下次点击时无法重新旋转
+                    icon.removeClass('rotate');
+                });
+            });
+        });
+
+    </script>
+
+    <script>
+        // 显示 dialog
+        function showDialog() {
+            document.getElementById("myDialog").showModal();
+        }
+
+        // 关闭 dialog
+        function closeDialog() {
+            document.getElementById("myDialog").close();
+            location.href = "index.html";
+        }
+    </script>
+
+    <!-- dialog 模态框 -->
+    <dialog id="myDialog">
+        <div class="modal-header">
+            <h2>温馨提示</h2>
+        </div>
+        <div class="modal-body">
+            <p>注册完成！请在邮箱里点击激活，<br>若未收到邮件，请检查<strong>垃圾箱</strong></p>
+        </div>
+        <div class="modal-footer">
+            <button class="close-btn" onclick="closeDialog()">关闭</button>
+        </div>
+    </dialog>
+
+</head>
+<body>
+<!--引入头部-->
+<div id="header"></div>
+<!-- 头部 end -->
+<div class="container centered-form">
+    <div class="col-md-6 col-lg-4 form-container">
+        <form id="registerForm">
+            <div class="register_title">
+                <p>用户注册</p>
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="输入邮箱">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="输入密码">
+            </div>
+
+            <div class="form-group">
+                <label for="repeatPassword">重复密码</label>
+                <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="再次输入密码">
+
+            </div>
+
+            <!-- 添加验证码 -->
+            <div class="form-group">
+                <label for="check">验证码</label>
+                <div class="captcha-group">
+                    <input type="text" class="form-control" id="check" name="check" placeholder="输入验证码" autocomplete="off">
+                    <div class="captcha-image">
+                        <img src="checkCode" alt="" id="checkCode" onclick="changeCheckCode(this)">
+                        <script type="text/javascript">
+                            //图片点击事件
+                            function changeCheckCode(img) {
+                                img.src = "checkCode?" + new Date().getTime();
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <a href="login.html">已有账号？去登录</a>
+            <!-- 错误提示预留空间 -->
+            <div class="invalid-feedback" style="min-height: 20px; color: red; font-weight: bold;" id="errorMsg">
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+        </form>
+    </div>
+    <!-- 右下角切换背景图片的按钮 -->
+    <div id="bg-toggle-button" class="bg-toggle-button">
+        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    </div>
+</div>
+
+</body>
+</html>

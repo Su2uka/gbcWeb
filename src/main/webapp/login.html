@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>登录-ガールズバンドクライ</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/login.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/include.js"></script>
+
+    <script>
+        $(function () {
+            //给登录按钮绑定单击事件
+            $("#login-btn").click(function () {
+                var email = $("#email").val();
+                var password = $("#password").val();
+                if (email != null && email.length > 0 && password != null && password.length > 0) {
+                    //输入不为空
+                    $.post("user/login",$("#loginForm").serialize(),function (data) {
+                        if (data.flag) {
+                            //登录成功
+                            location.href = "index.html";
+                        } else {
+                            //登录失败
+                            $("#errorMsg").html(data.errorMsg);
+                            $(".invalid-feedback").css("visibility","visible");
+
+                            //验证码刷新
+                            $("#checkCode").click();
+                        }
+                    });
+                }
+
+                return false;
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<div class="container centered-form">
+    <div class="col-md-6 col-lg-4 form-container">
+        <form id="loginForm">
+            <div class="login_img">
+                <img src="img/logo.webp">
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="输入邮箱">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="输入密码">
+            </div>
+            <!-- 添加验证码 -->
+            <div class="form-group">
+                <label for="check">验证码</label>
+                <div class="captcha-group">
+                    <input type="text" class="form-control" id="check" name="check" placeholder="输入验证码"
+                           autocomplete="off">
+                    <div class="captcha-image">
+                        <img src="checkCode" alt="" id="checkCode" onclick="changeCheckCode(this)">
+                        <script type="text/javascript">
+                            //图片点击事件
+                            function changeCheckCode(img) {
+                                img.src = "checkCode?" + new Date().getTime();
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="form-check" style="padding-bottom: 10px">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                <label class="form-check-label" for="rememberMe">记住我</label>
+            </div>
+            <a href="register.html">没有账号？去注册</a>
+            <!-- 错误提示预留空间 -->
+            <div class="invalid-feedback" style="min-height: 20px; color: red; font-weight: bold" id="errorMsg">
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="login-btn">登录</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

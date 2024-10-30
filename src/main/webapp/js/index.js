@@ -32,9 +32,12 @@ $(function () {
         $('.video-container').show();
         document.getElementById('video-player').play(); // 播放视频
 
-        // 页面滑动到视频播放器
-        document.querySelector('.video-container').scrollIntoView({
-            behavior: 'smooth'  // 使用平滑滚动效果
-        });
+        // 获取目标元素的位置
+        const offsetTop = $('.video-container').offset().top;
+
+        // 平滑滚动到指定位置
+        $('html, body').animate({
+            scrollTop: offsetTop
+        }, 500); // 500 毫秒的动画时间
     });
 });

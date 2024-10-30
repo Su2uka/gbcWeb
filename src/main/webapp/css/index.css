@@ -112,30 +112,6 @@ body {
     width: 150px;
 }
 
-.card {
-    position: relative;
-    width: 255px; /* 初始宽度 */
-    height: 645px; /* 初始高度 */
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: 5px solid transparent; /* 边框 */
-    /*padding: 200px;*/
-}
-
-
-.cards {
-    display: flex;
-    justify-content: center; /* 初始状态下子元素居中 */
-    gap: 40px; /* 设置子元素之间的间距 */
-    align-items: flex-start; /* 保证子元素顶部对齐 */
-    flex-wrap: wrap; /* 在小屏幕下允许换行 */
-    padding-top: 20px;
-    padding-bottom: 98px;
-}
-
 
 #card1 {
     background-color: #eeda01; /* 设置卡片背景颜色 */
@@ -157,15 +133,50 @@ body {
     background-color: #85c9dc; /* 设置卡片背景颜色 */
 }
 
+.card {
+    position: relative;
+    width: 255px; /* 初始宽度 */
+    height: 645px; /* 初始高度 */
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border: 5px solid transparent; /* 边框 */
+    transform-origin: center center; /* 可根据需要调整放大中心 */
+    z-index: 1; /* 默认层级 */
+}
+
+.card:hover {
+    transform: scaleX(1.3) scaleY(1.1); /* 分别放大宽度和高度 */
+    z-index: 10; /* 确保放大的卡片在顶层 */
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center; /* 初始状态下子元素居中 */
+    gap: 40px; /* 设置子元素之间的间距 */
+    align-items: flex-start; /* 保证子元素顶部对齐 */
+    flex-wrap: wrap; /* 在小屏幕下允许换行 */
+    padding-top: 20px;
+    padding-bottom: 98px;
+}
+
+
 .card img {
     width: 100%;
-    height: 100%; /* 图片填满卡片 */
-    object-fit: cover; /* 保持图片比例并填充卡片 */
-    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease; /* 增加平滑位移效果 */
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* 只过渡 transform 属性 */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 图片水平和垂直居中 */
+    transform: translate(-50%, -50%); /* 图片居中 */
+}
+
+.card:hover img {
+    /*transform: translate(-50%, -50%) scaleX(1.2) scaleY(1.1) !* 同步放大图片 *!*/
 }
 
 .card-content {
@@ -186,30 +197,13 @@ body {
     font-size: 16px;
 }
 
-
-
-
-.card:hover {
-    width: 420px;  /* 卡片水平扩展 */
-    height: 700px; /* 卡片垂直扩展 */
-    margin-left: -81px; /* 保持卡片居中，向两边展开 */
-    margin-top: -35px;  /* 卡片向上展开 */
-}
-
-.card:hover img {
-    /* 图片随着卡片一起展开*/
-    width: 100%;
-    height: 130%;
-    transform: translate(-50%, -40%); /* 仍然保持居中 */
-    filter: blur(2px); /* 当鼠标悬停时，模糊效果 */
-}
-
 .card:hover .card-content {
     opacity: 1;
 }
 
 .card-content h3 {
-    margin: 0;
+    /*margin: 0;*/
+    text-align: center;
 }
 
 .card-content p {

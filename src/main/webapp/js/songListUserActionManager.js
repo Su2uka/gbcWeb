@@ -95,8 +95,10 @@ $(function () {
             // 显示唱片机
             $('.record-player').addClass('show');
 
-            //更新唱片机喜欢状态
-            playerLike(songId);
+            if (user) {
+                //更新唱片机喜欢状态
+                playerLike(songId);
+            }
 
             //更新唱片机
             updatePlayer(songId);
@@ -108,9 +110,10 @@ $(function () {
             //切换图标样式,切换为暂停图标(上一个播放的按钮)
             $("#" + $.escapeSelector(currentId) + " .play-button").html('<span class="glyphicon glyphicon-play play-icon"></span>');
 
-
-            //更新唱片机喜欢状态
-            playerLike(songId);
+            if (user) {
+                //更新唱片机喜欢状态
+                playerLike(songId);
+            }
 
             // 停止唱片旋转
             $('.record').removeClass('playing');
@@ -222,7 +225,9 @@ $(function () {
         $("#audioSource").attr('src', songList[songId - 1].filepath);
 
         //更新唱片机喜欢状态
-        playerLike(songId);
+        if (user) {
+            playerLike(songId);
+        }
 
         updatePlayer(songId);
 
@@ -467,9 +472,10 @@ $(function () {
         $(".audioPlayer").attr('id', songId);
         $("#audioSource").attr('src', songList[songId - 1].filepath);
 
-
         //更新唱片机喜欢状态
-        playerLike(songId);
+        if (user) {
+            playerLike(songId);
+        }
 
         updatePlayer(songId);
 
@@ -514,7 +520,9 @@ $(function () {
         $("#audioSource").attr('src', songList[songId - 1].filepath);
 
         //更新唱片机喜欢状态
-        playerLike(songId);
+        if (user) {
+            playerLike(songId);
+        }
 
         updatePlayer(songId);
 

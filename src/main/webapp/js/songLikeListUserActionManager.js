@@ -29,13 +29,7 @@ $(function () {
         songList = list;
     });
 
-
     updateLikeList();
-    /*$.get("song/queryAllLike", {search: search}, function (list) {
-      playList = list;
-      // 创建 playList 的副本，避免引用同一个数组对象
-      playList_copy = playList.slice();
-    });*/
 });
 
 $(function () {
@@ -87,34 +81,24 @@ $(function () {
         currentId = parseInt(currentId);  // 确保 currentId 是数字
 
         //暂停当前播放
-        if (songId == currentId && isMusicPlaying(audio)) {
+        if (songId === currentId && isMusicPlaying(audio)) {
             audio.pause();
             return;
         }
 
         //恢复当前播放
-        if (songId == currentId && !isMusicPlaying(audio)) {
+        if (songId === currentId && !isMusicPlaying(audio)) {
             audio.play();
 
             return;
         }
 
         //首次播放
-        if (songId != currentId) {
+        if (songId !== currentId) {
 
             // 显示唱片机
             $('.record-player').addClass('show');
 
-            /*for (var i = 0; i < likeList.length; i++) {
-                var likeId = likeList[i].sid;
-
-                if (likeId == songId) {
-                    $("#player-like-button .like-icon").addClass("like-active");
-                    break;
-                } else {
-                    $("#player-like-button .like-icon").removeClass("like-active");
-                }
-            }*/
             //更新唱片机喜欢状态
             playerLike(songId);
 
@@ -124,7 +108,7 @@ $(function () {
         }
 
         //切换播放
-        if (currentId != "0" && songId != currentId) {
+        if (currentId !== "0" && songId !== currentId) {
             //切换图标样式,切换为暂停图标(上一个播放的按钮)
             $("#" + $.escapeSelector(currentId) + " .play-button").html('<span class="glyphicon glyphicon-play play-icon"></span>');
 
@@ -200,44 +184,37 @@ $(function () {
         currentId = $(".audioPlayer").attr('id');
         currentId = parseInt(currentId);
 
+        // 找到当前歌曲的索引
+        var currentIndex = playList.findIndex(function (song) {
+            return song.sid === currentId;
+        });
 
-        //顺序播放
-        if (currentModeIndex==0) {
-            //是否到了播放列表最末尾
-            if (currentId == playList[playList.length-1].sid) {
-                //到了
-                return;
-            }
-
-            //没有到最末尾
-            for (var i = 0; i < playList.length; i++) {
-                if (currentId == playList[i].sid){
-                    songId = playList[i+1].sid;
-                    break;
+        // 根据播放模式选择下一首歌曲
+        switch (currentModeIndex) {
+            case 0: // 顺序播放
+                if (currentIndex < playList.length - 1) {
+                    songId = playList[currentIndex + 1].sid;
+                } else {
+                    // 已到播放列表末尾，停止播放
+                    return;
                 }
-            }
-        } else if (currentModeIndex == 1) {  //单曲循环
-            songId = currentId;
-        } else if (currentModeIndex == 2) {  //随机播放
-            for (var i = 0; i < playList.length; i++) {
-                if (currentId == playList[i].sid){
-                    if (i < (playList.length-1)) {
-                        songId = playList[i+1].sid;
-                        break;
-                    }
+                break;
+            case 1: // 单曲循环
+                songId = currentId;
+                break;
+            case 2: // 随机播放（播放列表已打乱）
+                if (currentIndex < playList.length - 1) {
+                    songId = playList[currentIndex + 1].sid;
+                } else {
+                    // 已到播放列表末尾，重新开始
                     songId = playList[0].sid;
                 }
-            }
-        } else {  //列表循环
-            for (var i = 0; i < playList.length; i++) {
-                if (currentId == playList[i].sid){
-                    if (i < (playList.length-1)) {
-                        songId = playList[i+1].sid;
-                        break;
-                    }
-                    songId = playList[0].sid;
-                }
-            }
+                break;
+            case 3: // 列表循环
+            default:
+                // 使用取模运算，实现循环播放
+                songId = playList[(currentIndex + 1) % playList.length].sid;
+                break;
         }
 
         $(".audioPlayer").attr('id', songId);
@@ -248,11 +225,9 @@ $(function () {
 
         updatePlayer(songId);
 
-
         // 重新加载音频并播放
         audio.load();  // 重新加载新源
         audio.play();  // 播放音频
-
     });
 
 
@@ -297,14 +272,12 @@ $(function () {
         currentId = $(".audioPlayer").attr('id');
         currentId = parseInt(currentId);  // 确保 currentId 是数字
 
-
-        var search = getParameter("search");
+        /*var search = getParameter("search");
 
         // 如果 search 存在，进行解码
         if (search) {
             search = decodeURIComponent(search); // 对 URL 编码进行解码
-        }
-
+        }*/
 
         try {
             // 判断用户是否登录
@@ -324,14 +297,14 @@ $(function () {
             if (info.flag) {
                 await toggleLike(false, songId, user.uid);
 
-                if (songId == playerID) {
+                if (songId === playerID) {
                     $("#player-like-button .like-icon").removeClass("like-active");
                 }
 
             } else {
                 await toggleLike(true, songId, user.uid);
 
-                if (songId == playerID) {
+                if (songId === playerID) {
                     $("#player-like-button .like-icon").addClass("like-active");
                 }
 
@@ -511,14 +484,16 @@ $(function () {
         currentId = parseInt(currentId);
         //console.log("currentId:"+currentId);
 
-        for (var i = 0; i < playList.length; i++) {
-            if (currentId == playList[i].sid){
-                if (i != 0) {
-                    songId = playList[i-1].sid;
-                    break;
-                }
-                songId = playList[playList.length-1].sid;
-            }
+        // 找到当前歌曲的索引
+        var currentIndex = playList.findIndex(function (song) {
+            return song.sid === currentId;
+        });
+
+        if (currentIndex > 0) {
+            songId = playList[currentIndex - 1].sid;
+        } else {
+            // 在播放列表首，转到末尾
+            songId = playList[playList.length - 1].sid;
         }
 
         songId = parseInt(songId);
@@ -555,14 +530,16 @@ $(function () {
         currentId = parseInt(currentId);
         //console.log("currentId:"+currentId);
 
-        for (var i = 0; i < playList.length; i++) {
-            if (currentId == playList[i].sid){
-                if (i < (playList.length-1)) {
-                    songId = playList[i+1].sid;
-                    break;
-                }
-                songId = playList[0].sid;
-            }
+        // 找到当前歌曲的索引
+        var currentIndex = playList.findIndex(function (song) {
+            return song.sid === currentId;
+        });
+
+        if (currentIndex < playList.length - 1) {
+            songId = playList[currentIndex + 1].sid;
+        } else {
+            // 到了末尾，转到开头
+            songId = playList[0].sid;
         }
 
         songId = parseInt(songId);
@@ -639,15 +616,17 @@ $(function () {
 
 //唱片机喜欢图标状态
 function playerLike(songId) {
-    for (var i = 0; i < likeList.length; i++) {
-        var likeId = likeList[i].sid;
+    // 检查当前歌曲是否在喜欢列表中
+    var isLiked = likeList.some(function(item) {
+        return item.sid === songId;
+    });
 
-        if (likeId == songId) {
-            $("#player-like-button .like-icon").addClass("like-active");
-            break;
-        } else {
-            $("#player-like-button .like-icon").removeClass("like-active");
-        }
+    // 根据检查结果添加或移除类名
+    var likeIcon = $("#player-like-button .like-icon");
+    if (isLiked) {
+        likeIcon.addClass("like-active");
+    } else {
+        likeIcon.removeClass("like-active");
     }
 }
 

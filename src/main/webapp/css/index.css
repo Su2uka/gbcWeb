@@ -11,7 +11,7 @@ html, body {
 
 /* 白色区域的样式，固定高度为956px */
 .white-section {
-    height: 956px; /* 固定白色区域高度为956px */
+    height: 940px; /* 固定白色区域高度为940px */
     background-color: #e3e0e3; /* 设置背景颜色为色 */
 }
 
@@ -159,8 +159,8 @@ body {
     gap: 40px; /* 设置子元素之间的间距 */
     align-items: flex-start; /* 保证子元素顶部对齐 */
     flex-wrap: wrap; /* 在小屏幕下允许换行 */
-    padding-top: 20px;
-    padding-bottom: 98px;
+    padding-top: 35px;
+    padding-bottom: 95px;
 }
 
 
@@ -187,7 +187,6 @@ body {
     bottom: 0;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10px;
-    transition: all 0.3s ease;
     opacity: 0;
     display: flex;
     flex-direction: column;
@@ -195,6 +194,7 @@ body {
     align-items: center;
     color: black;
     font-size: 16px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .card:hover .card-content {

@@ -466,7 +466,6 @@ $(function () {
         songId = parseInt(songId);
         //console.log("songId:"+songId);
 
-
         $("#" + $.escapeSelector(currentId) + " .play-button").html('<span class="glyphicon glyphicon-play play-icon"></span>');
 
         $(".audioPlayer").attr('id', songId);
@@ -482,7 +481,6 @@ $(function () {
         // 重新加载音频并播放
         audio.load();  // 重新加载新源
         audio.play();  // 播放音频
-
 
     });
 
@@ -512,7 +510,6 @@ $(function () {
 
         songId = parseInt(songId);
         //console.log("songId:"+songId);
-
 
         $("#" + $.escapeSelector(currentId) + " .play-button").html('<span class="glyphicon glyphicon-play play-icon"></span>');
 

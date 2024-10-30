@@ -9,12 +9,11 @@ public class Song {
     private String duration; //总时长
     private String cover; //封面图片路径
     private String download; //下载路径
-    private boolean like; //是否喜欢
 
     public Song() {
     }
 
-    public Song(int sid, String filepath, String title, String artist, String album, String duration, String cover, String download, boolean like) {
+    public Song(int sid, String filepath, String title, String artist, String album, String duration, String cover, String download) {
         this.sid = sid;
         this.filepath = filepath;
         this.title = title;
@@ -23,7 +22,6 @@ public class Song {
         this.duration = duration;
         this.cover = cover;
         this.download = download;
-        this.like = like;
     }
 
     public int getSid() {
@@ -88,14 +86,6 @@ public class Song {
 
     public void setDownload(String download) {
         this.download = download;
-    }
-
-    public boolean isLike() {
-        return like;
-    }
-
-    public void setLike(boolean like) {
-        this.like = like;
     }
 
 }

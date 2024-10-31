@@ -125,8 +125,10 @@ public class SongServlet extends BaseServlet {
         //处理参数
         if (search != null && search.length() > 0 && !"null".equals(search)) {
             search = new String(search.getBytes("iso-8859-1"), "utf-8");
+            System.out.println("有参的 queryAll触发了");
         } else {
             search = "";
+            System.out.println("无参的 queryAll触发了");
         }
 
         List<Song> list = songService.queryAll(search);

@@ -4,10 +4,8 @@ import cn.gent1.gbc.dao.LikeDao;
 import cn.gent1.gbc.dao.SongDao;
 import cn.gent1.gbc.dao.UserDaoImpl.LikeDaoImpl;
 import cn.gent1.gbc.dao.UserDaoImpl.SongDaoImpl;
-import cn.gent1.gbc.domain.Like;
 import cn.gent1.gbc.domain.PageBean;
 import cn.gent1.gbc.domain.Song;
-import cn.gent1.gbc.domain.User;
 import cn.gent1.gbc.service.SongService;
 import cn.gent1.gbc.util.JedisUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,8 +16,8 @@ import java.util.List;
 
 public class SongServiceImpl implements SongService {
 
-    private SongDao songDao = new SongDaoImpl();
-    private LikeDao likeDao = new LikeDaoImpl();
+    private final SongDao songDao = new SongDaoImpl();
+    private final LikeDao likeDao = new LikeDaoImpl();
 
 
     @Override

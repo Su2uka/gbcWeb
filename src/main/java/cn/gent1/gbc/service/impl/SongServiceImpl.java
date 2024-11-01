@@ -24,30 +24,81 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public PageBean<Song> pageQuery(int currentPage, int pageSize, String search) {
-        //封装PageBean
-        PageBean<Song> pb = new PageBean<Song>();
+        // 获取 Redis 客户端
+        Jedis jedis = JedisUtil.getJedis();
+        final ObjectMapper objectMapper = new ObjectMapper();
 
-        //当前页码
-        pb.setCurrentPage(currentPage);
-        //每页显示条数
-        pb.setPageSize(pageSize);
+        // 定义缓存键前缀
+        final String REDIS_KEY_PREFIX = "songs:page:";
+        String redisKey = REDIS_KEY_PREFIX + search + ":" + currentPage + ":" + pageSize;
 
-        //设置总记录数TotalCount
-        int totalCount = songDao.findTotalCount(search);
-        pb.setTotalCount(totalCount);
+        // 封装 PageBean
+        PageBean<Song> pb = new PageBean<>();
 
-        //设置当前页显示的集合
-        int start = (currentPage - 1) * pageSize; //开始的记录数
-        List<Song> list = songDao.findByPage(start, pageSize, search);
-        pb.setList(list);
+        try {
+            // 尝试从 Redis 缓存中获取分页数据
+            String cachedPageData = jedis.get(redisKey);
 
-        //设置总页数
-        int totalPage = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
-        pb.setTotalPage(totalPage);
+            if (cachedPageData != null) {
+                // 如果缓存中存在分页数据，直接反序列化为 PageBean
+                pb = objectMapper.readValue(cachedPageData, new TypeReference<PageBean<Song>>() {
+                });
+                System.out.println("从 Redis 中读取分页数据...");
+            } else {
+                System.out.println("缓存未命中，查询数据库...");
 
+                // 当前页码
+                pb.setCurrentPage(currentPage);
+                // 每页显示条数
+                pb.setPageSize(pageSize);
+
+                // 获取总记录数 totalCount
+                String totalCountKey = REDIS_KEY_PREFIX + search + ":totalCount";
+                String cachedTotalCount = jedis.get(totalCountKey);
+
+                int totalCount;
+                if (cachedTotalCount != null) {
+                    // 缓存中存在 totalCount
+                    totalCount = Integer.parseInt(cachedTotalCount);
+                } else {
+                    // 缓存中没有 totalCount，从数据库查询并缓存
+                    totalCount = songDao.findTotalCount(search);
+                    jedis.setex(totalCountKey, 3600, String.valueOf(totalCount));
+                }
+                pb.setTotalCount(totalCount);
+
+                // 设置当前页显示的集合
+                int start = (currentPage - 1) * pageSize; // 开始的记录数
+                List<Song> list = songDao.findByPage(start, pageSize, search);
+                pb.setList(list);
+
+                // 设置总页数
+                int totalPage = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
+                pb.setTotalPage(totalPage);
+
+                // 将 PageBean 序列化后存入 Redis 缓存
+                jedis.setex(redisKey, 3600, objectMapper.writeValueAsString(pb));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 异常处理：缓存出错时从数据库查询
+            int totalCount = songDao.findTotalCount(search);
+            pb.setTotalCount(totalCount);
+
+            int start = (currentPage - 1) * pageSize;
+            List<Song> list = songDao.findByPage(start, pageSize, search);
+            pb.setList(list);
+
+            int totalPage = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
+            pb.setTotalPage(totalPage);
+        } finally {
+            // 关闭 Redis 连接
+            jedis.close();
+        }
 
         return pb;
     }
+
 
     @Override
     public List<Song> queryAll(String search) {
@@ -70,7 +121,8 @@ public class SongServiceImpl implements SongService {
             String cachedData = jedis.get(redisKey);
             if (cachedData != null) {
                 // 如果缓存中存在数据，将 JSON 反序列化为 List<Song> 对象
-                songs = objectMapper.readValue(cachedData, new TypeReference<List<Song>>() {});
+                songs = objectMapper.readValue(cachedData, new TypeReference<List<Song>>() {
+                });
                 System.out.println("从redis中取出数据.....");
             } else {
                 // 缓存中没有数据，从数据库中查询
@@ -118,7 +170,7 @@ public class SongServiceImpl implements SongService {
 
         //设置当前页显示的集合
         int start = (currentPage - 1) * pageSize; //开始的记录数
-        List<Song> list = likeDao.findByPage(start, pageSize, search ,uid);
+        List<Song> list = likeDao.findByPage(start, pageSize, search, uid);
         pb.setList(list);
 
         //设置总页数
@@ -131,7 +183,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<Song> queryAllLike(String search, int uid) {
-        return songDao.queryLikeSongByUid(search,uid);
+        return songDao.queryLikeSongByUid(search, uid);
     }
 
 

@@ -3,8 +3,8 @@
 # [GirlsBandCry Web](https://gent1.cn)
 技术栈 : ***html+css+js+bootstrap v3+jQuery+java+mysql+redis***
 - - -
-课设级项目，sql文件位于resource文件夹  
-[点击前往网站](https://gent1.cn)
+sql文件位于resource文件夹  
+[网站](https://gent1.cn)
 - - -
 **网站效果展示**
 >![image](https://github.com/user-attachments/assets/aa8b4e08-98ea-4e79-beb3-e4e3d181a877)
